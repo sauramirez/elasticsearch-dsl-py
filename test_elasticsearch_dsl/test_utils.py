@@ -1,5 +1,6 @@
 from elasticsearch_dsl import utils
 
+
 def test_merge():
     a = {'a': {'b': 42, 'c': 47}}
     b = {'a': {'b': 123, 'd': -12}, 'e': [1, 2, 3]}
@@ -7,6 +8,7 @@ def test_merge():
     utils.merge(a, b)
 
     assert a == {'a': {'b': 123, 'c': 47, 'd': -12}, 'e': [1, 2, 3]}
+
 
 def test_attrdict_bool():
     d = utils.AttrDict({})
@@ -30,3 +32,15 @@ def test_make_dsl_class():
 
     assert XY.__name__ == 'XY'
     assert XY.__bases__ == (object, )
+
+
+def test_items():
+    wrapped_dict = {'d': 2}
+    attr_dict = utils.AttrDict(wrapped_dict)
+    assert attr_dict.items() == wrapped_dict.items()
+
+
+def test_itertems():
+    wrapped_dict = {'d': 2}
+    attr_dict = utils.AttrDict(wrapped_dict)
+    assert next(attr_dict.iteritems()) == next(wrapped_dict.iteritems())

@@ -137,6 +137,12 @@ class AttrDict(object):
     def __iter__(self):
         return iter(self._d_)
 
+    def items(self):
+        return self._d_.items()
+
+    def iteritems(self):
+        return self._d_.iteritems()
+
     def to_dict(self):
         return self._d_
 
